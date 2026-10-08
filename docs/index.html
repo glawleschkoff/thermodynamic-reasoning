@@ -16,6 +16,7 @@
   .plot .cur { position: absolute; top: 0; bottom: 0; width: 1px; background: #fff; opacity: .8; pointer-events: none; }
   .plot .ttl { display: none; position: absolute; left: 10px; top: 6px; font-size: 13px; font-weight: 600; color: #cbd5e1; pointer-events: none; }
   #plotsToggle { position: fixed; left: 50%; bottom: calc(var(--bar) + var(--ph)); transition: bottom .35s ease; transform: translateX(-50%); width: 64px; height: 22px; padding: 0; border-radius: 8px 8px 0 0; border-bottom: none; background: #1d2430; z-index: 5; display: flex; align-items: center; justify-content: center; }
+  @media (max-width: 700px), (max-height: 520px) { #plotsToggle { left: 37%; } }
   #plotsToggle svg { transition: transform .35s ease; }
   body.plots-open #plotsToggle svg { transform: rotate(180deg); }
   #left { position: fixed; top: 0; bottom: calc(var(--bar) + var(--ph)); transition: bottom .35s ease; left: 0; width: 33.333%; background: #1a212a; border-right: 2px solid #3a4356; box-sizing: border-box; }

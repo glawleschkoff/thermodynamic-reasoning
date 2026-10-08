@@ -494,7 +494,7 @@ function resize() {
   const k = (1 + 0.2 * op) * (small2 ? 0.6 : 1);   // small screens: bee board larger
   camera2.fov = 2 * Math.atan(Math.tan(20 * Math.PI / 180) * k * r2.height / H0) * 180 / Math.PI;
   camera2.aspect = r2.width / r2.height;
-  camera2.setViewOffset(r2.width, r2.height, (small2 ? 0.08 : 0) * r2.width, (0.12 * op + (small2 ? 0.06 : 0)) * r2.height, r2.width, r2.height);   // shift the image upwards
+  camera2.setViewOffset(r2.width, r2.height, (small2 ? 0.04 : 0) * r2.width, (0.12 * op + (small2 ? 0.06 : 0)) * r2.height, r2.width, r2.height);   // shift the image upwards
   camera2.updateProjectionMatrix();
 }
 window.addEventListener('resize', resize); resize();
