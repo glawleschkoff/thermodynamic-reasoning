@@ -481,7 +481,7 @@ function resize() {
     const Hm = Math.max(1, window.innerHeight - (window.innerWidth <= 700 || window.innerHeight <= 520 ? 60 : 76));
     const opR = Math.min(1, Math.max(0, 1 - r.height / Hm) * 2);   // 0 = window closed, 1 = open
     const small = window.innerWidth <= 700 || window.innerHeight <= 520;
-    camera.fov = 45 * (1 + 0.05 * opR) * (small ? 1.3 : 1);   // small screens: zoom out so POMDP and labels are not cropped
+    camera.fov = 45 * (1 + 0.05 * opR) * (small ? 1.0 : 1);   // small screens: zoom out so POMDP and labels are not cropped
     camera.aspect = r.width / r.height;
     camera.setViewOffset(r.width, r.height, 0, (small ? 0 : 0.06) * r.height, r.width, r.height);   // shift upwards
     camera.updateProjectionMatrix();
