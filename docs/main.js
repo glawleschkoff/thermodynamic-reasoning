@@ -485,9 +485,9 @@ function resize() {
     const Hm = Math.max(1, window.innerHeight - (window.innerWidth <= 700 || window.innerHeight <= 520 ? 60 : 76));
     const opR = Math.min(1, Math.max(0, 1 - r.height / Hm) * 2);   // 0 = window closed, 1 = open
     const small = window.innerWidth <= 700 || window.innerHeight <= 520;
-    camera.fov = 45 * (1 + 0.05 * opR) * (small ? 1.0 : 1);   // small screens: zoom out so POMDP and labels are not cropped
+    camera.fov = 45 * (1 + (small ? 0.2 : 0.05) * opR);   // small screens: zoom out so POMDP and labels are not cropped
     camera.aspect = r.width / r.height;
-    camera.setViewOffset(r.width, r.height, 0, (small ? 0.05 : 0.06) * r.height, r.width, r.height);   // shift upwards
+    camera.setViewOffset(r.width, r.height, 0, (small ? 0.05 + 0.04 * opR : 0.06) * r.height, r.width, r.height);   // shift upwards
     camera.updateProjectionMatrix();
   }
   renderer2.setPixelRatio(pr); renderer2.setSize(r2.width, r2.height, false);
@@ -545,7 +545,7 @@ function zoomStep() {
     if (frame < q.outE) break;
   }
   if (!sh || e === 0) { camera.position.copy(zoomBase.pos); controls.target.copy(zoomBase.tgt); return; }
-  const tgt = sh.panel.group.position.clone().add(new THREE.Vector3(0, 0.8, 0));
+  const tgt = sh.panel.group.position.clone().add(new THREE.Vector3(0, -0.4, 0));
   const dir = zoomBase.pos.clone().sub(zoomBase.tgt).normalize();
   camera.position.lerpVectors(zoomBase.pos, tgt.clone().addScaledVector(dir, ZOOM_DIST), e);
   controls.target.lerpVectors(zoomBase.tgt, tgt, e);
