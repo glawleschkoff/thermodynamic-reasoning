@@ -11,7 +11,11 @@ export const plotsEl = document.getElementById('plots');
 export const plotState = { lastShot: -2 };
 const PLOT_SCROLL_MS = 2500;   // duration of the automatic scrolling (ms)
 export const scrollState = { id: 0 };
+let held = false;   // finger/mouse on the plot window: no automatic scrolling
+for (const ev of ['touchstart', 'pointerdown']) plotsEl.addEventListener(ev, () => { held = true; scrollState.id++; }, { passive: true });
+for (const ev of ['touchend', 'touchcancel', 'pointerup']) window.addEventListener(ev, () => { held = false; }, { passive: true });
 export function slowScroll(target) {
+  if (held) return;
   const from = plotsEl.scrollTop, t0 = performance.now(), id = ++scrollState.id;
   const step = (now) => {
     if (id !== scrollState.id) return;
