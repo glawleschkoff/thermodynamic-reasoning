@@ -495,10 +495,10 @@ function resize() {
   const H0 = Math.max(1, window.innerHeight - (window.innerWidth <= 700 || window.innerHeight <= 520 ? 60 : 76));
   const op = Math.min(1, Math.max(0, 1 - r2.height / H0) * 2);   // 0 = closed, 1 = fully open
   const small2 = window.innerWidth <= 700 || window.innerHeight <= 520;
-  const k = (1 + 0.2 * op) * (small2 ? 0.75 : 1);   // small screens: bee board larger
+  const k = (1 + (small2 ? 0.32 : 0.2) * op) * (small2 ? 0.75 : 1);   // small screens: bee board larger
   camera2.fov = 2 * Math.atan(Math.tan(20 * Math.PI / 180) * k * r2.height / H0) * 180 / Math.PI;
   camera2.aspect = r2.width / r2.height;
-  camera2.setViewOffset(r2.width, r2.height, (small2 ? 0.04 : 0) * r2.width, (0.12 * op + (small2 ? 0.06 : 0)) * r2.height, r2.width, r2.height);   // shift the image upwards
+  camera2.setViewOffset(r2.width, r2.height, (small2 ? 0.04 : 0) * r2.width, ((small2 ? 0.03 : 0.12) * op + (small2 ? 0.06 : 0)) * r2.height, r2.width, r2.height);   // shift the image upwards
   camera2.updateProjectionMatrix();
 }
 window.addEventListener('resize', resize); resize();
