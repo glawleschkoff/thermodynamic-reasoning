@@ -337,8 +337,8 @@ const tSlider = document.getElementById('t'), playBtn = document.getElementById(
 const ICON_PLAY = '<svg width="28" height="28" viewBox="0 0 20 20"><path d="M5 2.5 L17 10 L5 17.5 Z" fill="currentColor"/></svg>';
 const ICON_PAUSE = '<svg width="28" height="28" viewBox="0 0 20 20"><rect x="4" y="2.5" width="4.2" height="15" fill="currentColor"/><rect x="11.8" y="2.5" width="4.2" height="15" fill="currentColor"/></svg>';
 playBtn.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
-playBtn.onclick = () => { playing = !playing; playBtn.innerHTML = playing ? ICON_PAUSE : ICON_PLAY; };
-document.getElementById('plotsToggle').onclick = () => {
+playBtn.onpointerdown = () => { playing = !playing; playBtn.innerHTML = playing ? ICON_PAUSE : ICON_PLAY; };
+document.getElementById('plotsToggle').onpointerdown = () => {
   const open = document.body.classList.toggle('plots-open');
   const it = open && plotState.lastShot >= 0 && plotItems[plotState.lastShot];
   if (it) { scrollState.id++; plotsEl.scrollTop = it.box.offsetTop; }   // jump to the active plot immediately when opening
@@ -479,7 +479,7 @@ let vw = 1, vh = 1, vx = 0;
 function resize() {
   const r = canvas.getBoundingClientRect(), r2 = canvas2.getBoundingClientRect();
   vw = r.width; vh = r.height; vx = r.left;
-  const pr = Math.min(2, window.devicePixelRatio);
+  const pr = Math.min((window.innerWidth <= 700 || window.innerHeight <= 520) ? 1.5 : 2, window.devicePixelRatio);
   renderer.setPixelRatio(pr); renderer.setSize(r.width, r.height, false);
   {
     const Hm = Math.max(1, window.innerHeight - (window.innerWidth <= 700 || window.innerHeight <= 520 ? 60 : 76));
