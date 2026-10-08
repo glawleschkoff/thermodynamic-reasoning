@@ -27,8 +27,7 @@ The viewer is static. On GitHub Pages choose "Deploy from a branch", branch `mai
 ## Credits and licenses
 - Code: MIT, see `LICENSE`.
 - Bee model: "Cube Pets" by Kenney (kenney.nl), CC0.
-- Honeycomb model: "Honeycomb" by Poly by Google, licensed under CC BY 3.0
-  (https://creativecommons.org/licenses/by/3.0/). Attribution: Poly by Google. The model was converted/used
-  unchanged except for scaling and placement. Please add the exact author name and source link from the
-  download page here.
+- Honeycomb model: "Honeycomb" by Poly by Google [CC-BY]
+  (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/6Mqdrv1n3Oo).
+  Used unchanged except for scaling, rotation and placement.
 - three.js (MIT), included in `docs/vendor`.
