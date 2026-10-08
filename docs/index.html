@@ -27,6 +27,7 @@
   #labels div { position: fixed; left: 0; top: 0; will-change: transform; font-size: 14px; font-weight: 600; pointer-events: none; white-space: nowrap; text-align: center; }
   #ctrl { position: fixed; bottom: 0; left: 0; right: 0; height: var(--bar); box-sizing: border-box; padding: 16px; background: #161b22cc; display: flex; gap: 12px; align-items: center; }
   #ctrl { align-items: flex-start; }
+  @media (max-width: 700px), (max-height: 520px) { #labels div { font-size: 10px; } }
   #tl { flex: 1; position: relative; margin-top: 4px; height: 40px; }   /* bar incl. text 10 px higher: gap above ≈ gap below */
   #tl input[type=range]#t { width: 100%; margin: 0; display: block; height: 16px; }
   #segs { position: absolute; left: 8px; right: 8px; top: 0; height: 16px; pointer-events: none; }

@@ -481,7 +481,7 @@ function resize() {
     const Hm = Math.max(1, window.innerHeight - (window.innerWidth <= 700 || window.innerHeight <= 520 ? 60 : 76));
     const opR = Math.min(1, Math.max(0, 1 - r.height / Hm) * 2);   // 0 = window closed, 1 = open
     const small = window.innerWidth <= 700 || window.innerHeight <= 520;
-    camera.fov = 45 * (1 + 0.05 * opR) * (small ? 0.7 : 1);   // small screens: zoom in
+    camera.fov = 45 * (1 + 0.05 * opR) * (small ? 0.82 : 1);   // small screens: zoom in (less, so the notes stay visible)
     camera.aspect = r.width / r.height;
     camera.setViewOffset(r.width, r.height, 0, 0.06 * r.height, r.width, r.height);   // shift upwards
     camera.updateProjectionMatrix();
@@ -491,7 +491,7 @@ function resize() {
   const H0 = Math.max(1, window.innerHeight - (window.innerWidth <= 700 || window.innerHeight <= 520 ? 60 : 76));
   const op = Math.min(1, Math.max(0, 1 - r2.height / H0) * 2);   // 0 = closed, 1 = fully open
   const small2 = window.innerWidth <= 700 || window.innerHeight <= 520;
-  const k = (1 + 0.2 * op) * (small2 ? 0.75 : 1);   // small screens: bee board larger
+  const k = (1 + 0.2 * op) * (small2 ? 0.6 : 1);   // small screens: bee board larger
   camera2.fov = 2 * Math.atan(Math.tan(20 * Math.PI / 180) * k * r2.height / H0) * 180 / Math.PI;
   camera2.aspect = r2.width / r2.height;
   camera2.setViewOffset(r2.width, r2.height, 0, 0.12 * op * r2.height, r2.width, r2.height);   // shift the image upwards
