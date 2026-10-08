@@ -14,8 +14,10 @@ export const scrollState = { id: 0 };
 let held = false;   // finger/mouse on the plot window: no automatic scrolling
 for (const ev of ['touchstart', 'pointerdown']) plotsEl.addEventListener(ev, () => { held = true; scrollState.id++; }, { passive: true });
 for (const ev of ['touchend', 'touchcancel', 'pointerup']) window.addEventListener(ev, () => { held = false; }, { passive: true });
+let wheelUntil = 0;   // mouse wheel on the plot window: pause automatic scrolling briefly
+plotsEl.addEventListener('wheel', () => { wheelUntil = performance.now() + 2500; scrollState.id++; }, { passive: true });
 export function slowScroll(target) {
-  if (held) return;
+  if (held || performance.now() < wheelUntil) return;
   const from = plotsEl.scrollTop, t0 = performance.now(), id = ++scrollState.id;
   const step = (now) => {
     if (id !== scrollState.id) return;
