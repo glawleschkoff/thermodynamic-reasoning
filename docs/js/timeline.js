@@ -6,7 +6,7 @@ const N = D.traj.length;
 export const BEE_WAIT = 10, BEE_FLIGHT = 40;      // wait after arrival, flight duration
 export const BEE_FLAP_PRE = 10, BEE_FLAP_POST = 10;   // flapping 1 s before take-off and 1 s after landing
 
-export const ZOOM_DIST = 8.5;   // distance to the panel at the end of the fly-in (smaller = closer)
+export const ZOOM_DIST = 9.2;   // distance to the panel at the end of the fly-in (smaller = closer)
 export const SHOTS = ['OBSERVATION o₂', 'OBSERVATION o₀'].map(name => {
   const panel = PANELS.find(q => q.name === name);
   const cs = (D.params.clamp_starts || {})[String(panel.bits[0])];
