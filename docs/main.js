@@ -343,6 +343,10 @@ document.getElementById('plotsToggle').onclick = () => {
   const it = open && plotState.lastShot >= 0 && plotItems[plotState.lastShot];
   if (it) { scrollState.id++; plotsEl.scrollTop = it.box.offsetTop; }   // jump to the active plot immediately when opening
 };   // slide the 2D plot window in/out
+tSlider.onclick = (e) => {   // beads sit on top of the thumb: snap to a bead when the click lands on it
+  const hit = BEADS.find(q => Math.abs(q.d.getBoundingClientRect().left + 12 - e.clientX) < 18);
+  if (hit) { frame = hit.s; tSlider.value = frame / END_FRAME; trails.forEach(q => { q.length = 0; }); }
+};
 tSlider.oninput = () => { frame = parseFloat(tSlider.value) * END_FRAME; trails.forEach(t => { t.length = 0; }); };
 
 const canvas2 = document.getElementById('c2');
@@ -514,7 +518,6 @@ if (SHOTS.length === 5) {
     const d = document.createElement('div'); d.className = 'bead';
     d.style.left = (sh.inS / END_FRAME * 100) + '%';
     const t = document.createElement('span'); t.textContent = SEG_LABELS[i]; d.appendChild(t);
-    d.onclick = () => { frame = sh.inS; tSlider.value = frame / END_FRAME; trails.forEach(q => { q.length = 0; }); };   // slider jumps along even while paused
     segDiv.appendChild(d); BEADS.push({ s: sh.inS, d });
   });
 }
