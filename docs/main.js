@@ -547,7 +547,7 @@ function zoomStep() {
   if (!sh || e === 0) { camera.position.copy(zoomBase.pos); controls.target.copy(zoomBase.tgt); return; }
   const tgt = sh.panel.group.position.clone().add(new THREE.Vector3(0, -0.4, 0));
   const dir = zoomBase.pos.clone().sub(zoomBase.tgt).normalize();
-  camera.position.lerpVectors(zoomBase.pos, tgt.clone().addScaledVector(dir, ZOOM_DIST), e);
+  camera.position.lerpVectors(zoomBase.pos, tgt.clone().addScaledVector(dir, ZOOM_DIST * ((window.innerWidth <= 700 || window.innerHeight <= 520) ? 1 : 1.12)), e);
   controls.target.lerpVectors(zoomBase.tgt, tgt, e);
 }
 function loop(now) {
