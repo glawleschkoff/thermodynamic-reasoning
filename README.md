@@ -4,10 +4,7 @@
 
 [![Screenshot of the viewer](docs/img/screenshot.png)](https://glawleschkoff.github.io/thermodynamic-reasoning/)
 
-Sixteen p-bits (Langevin dynamics in a double-well potential) encode a POMDP with three hidden
-states, three observations and two actions (two p-bits = four states per variable). A 3D viewer
-plays back the precomputed simulation together with 2D probability plots and the exact Bayesian
-posteriors as a reference.
+Sixteen coupled p-bits governed by double-well Langevin dynamics encode a POMDP (three hidden states, three observations, and two actions), realizing perception, planning, and action via thermal relaxation. The interactive 3D viewer visualizes the trajectories across continuous energy surfaces alongside empirical state distributions and exact analytical Bayesian posteriors.
 
 ## Structure
 - `pbits/model.py` – parameters, coupling matrix J, clamping plan
