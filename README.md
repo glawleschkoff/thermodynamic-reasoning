@@ -7,15 +7,15 @@
 Sixteen coupled p-bits governed by double-well Langevin dynamics encode a POMDP (three hidden states, three observations, and two actions), realizing perception, planning, and action via thermal relaxation. The interactive 3D viewer visualizes the trajectories across continuous energy surfaces alongside empirical state distributions and exact analytical Bayesian posteriors.
 
 ## Structure
-- `pbits/model.py` – the physics: double-well potential, coupling matrix J (sensor and transition models), energy V
-- `pbits/simulate.py` – the dynamics: Euler-Maruyama steps of the Langevin equation (JAX), with clamping from outside
-- everything else is bulk and visuals: ensemble check, exact Bayes reference, data export, dev server and the
-  browser viewer (`pbits/ensemble.py`, `pbits/bayes.py`, `pbits/export.py`, `run.py`, `dev.py`, `docs/`)
+- `model.py` – the physics: double-well potential, coupling matrix J (sensor and transition models), energy V
+- `simulate.py` – the dynamics: Euler-Maruyama steps of the Langevin equation (JAX), with clamping from outside
+- `pipeline/` – everything around them: ensemble check, exact Bayes reference, data export, dev server, notebook
+- `docs/` – the browser viewer (also served by GitHub Pages)
 
 ## Usage
     pip install -r requirements.txt
-    python3 run.py      # simulation -> docs/data.js
-    python3 dev.py      # http://localhost:8000
+    python3 -m pipeline.run   # simulation -> docs/data.js
+    python3 -m pipeline.dev   # http://localhost:8000
 
 ## Demo
 The viewer is static. On GitHub Pages choose "Deploy from a branch", branch `main`, folder `/docs`.

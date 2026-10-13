@@ -1,6 +1,6 @@
 import jax
 import jax.numpy as jnp
-from . import model
+import model
 
 beta = 1.2
 dt = 0.05

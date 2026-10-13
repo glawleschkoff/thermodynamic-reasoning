@@ -9,8 +9,8 @@ import numpy as np
 
 from . import bayes
 from . import ensemble
-from . import model
-from . import simulate as sim
+import model
+import simulate as sim
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VIEWER = os.path.join(ROOT, "docs")

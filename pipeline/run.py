@@ -1,10 +1,12 @@
 """Simulates the p-bit POMDP and writes docs/data.js.
 
-Usage:  python3 run.py
+Usage:  python3 -m pipeline.run   (from the repository root)
 """
 import jax
 
-from pbits import ensemble, export, simulate
+import simulate
+
+from . import ensemble, export
 
 SEED = 1            # chosen so that a0 points left and a1 points down during the bee's flights
 EXPORT_STRIDE = 2   # every 2nd step goes into data.js

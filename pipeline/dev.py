@@ -1,8 +1,8 @@
 """Dev server with auto-reload.
 
-Usage:  python3 dev.py   (then open http://localhost:8000)
+Usage:  python3 -m pipeline.dev   (then open http://localhost:8000)
 
-- Change to run.py / pbits/*.py -> run.py runs again (writes docs/data.js), browser reloads
+- Change to model.py / simulate.py / pipeline/*.py -> run.py runs again (writes docs/data.js), browser reloads
 - Change to docs/*.js/html -> browser reloads
 The reload code is injected into index.html only when serving; the file itself stays unchanged.
 """
@@ -13,11 +13,11 @@ import threading
 import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VIEWER = os.path.join(ROOT, "docs")
 PORT = 8000
-CORE = os.path.join(ROOT, "run.py")
-WATCH_PY = [os.path.join(ROOT, "run.py")] + [os.path.join(ROOT, "pbits", f) for f in ("model.py", "simulate.py", "ensemble.py", "bayes.py", "export.py")]
+CORE = [sys.executable, "-m", "pipeline.run"]
+WATCH_PY = [os.path.join(ROOT, f) for f in ("model.py", "simulate.py")] + [os.path.join(ROOT, "pipeline", f) for f in ("run.py", "ensemble.py", "bayes.py", "export.py")]
 WATCH_VIEWER = ["index.html", "main.js", "data.js"]
 # Auto-reload in the browser (polls /__version every 700 ms). Off because it costs memory;
 # reload the page manually (Cmd+R) instead. run.py is still re-run automatically.
@@ -46,7 +46,7 @@ def run_core():
     state["status"] = "running"
     print("[dev] run.py running ...", flush=True)
     env = dict(os.environ, MPLBACKEND="Agg")
-    res = subprocess.run([sys.executable, CORE], cwd=ROOT, env=env, capture_output=True, text=True)
+    res = subprocess.run(CORE, cwd=ROOT, env=env, capture_output=True, text=True)
     if res.returncode != 0:
         print("[dev] run.py FEHLER:\n" + res.stderr[-1500:], flush=True)
     else:

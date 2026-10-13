@@ -10,8 +10,8 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-from . import model
-from . import simulate as sim
+import model
+import simulate as sim
 
 K = 500
 SMOOTH = 5   # moving average over export frames (only within sections between clamp times)

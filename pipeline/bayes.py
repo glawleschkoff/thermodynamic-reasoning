@@ -1,6 +1,6 @@
 """Exact Bayes posteriors (marginals per p-bit pair, order A B C D or ↑ → ↓ ←).
 
-Derivation: generative model in notebooks/test.ipynb (first cell). The values are computed there and stored here as constants.
+Derivation: generative model in pipeline/notebooks/test.ipynb (first cell). The values are computed there and stored here as constants.
 """
 
 # after o2 = C, valid from o2_clamped to o0_clamped
