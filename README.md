@@ -2,7 +2,7 @@
 
 **Live demo: https://glawleschkoff.github.io/thermodynamic-reasoning/**
 
-[![Screenshot of the viewer](docs/img/screenshot.png)](https://glawleschkoff.github.io/thermodynamic-reasoning/)
+[![Animated recording of the viewer](docs/img/demo.gif)](https://glawleschkoff.github.io/thermodynamic-reasoning/)
 
 Sixteen coupled p-bits governed by double-well Langevin dynamics encode a POMDP (three hidden states, three observations, and two actions), realizing perception, planning, and action via thermal relaxation. The interactive 3D viewer visualizes the trajectories across continuous energy surfaces alongside empirical state distributions and exact analytical Bayesian posteriors.
 
