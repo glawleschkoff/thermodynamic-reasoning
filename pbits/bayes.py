@@ -1,4 +1,4 @@
-"""Exact Bayes posteriors (marginals per bit pair, order A B C D or ↑ → ↓ ←).
+"""Exact Bayes posteriors (marginals per p-bit pair, order A B C D or ↑ → ↓ ←).
 
 Derivation: generative model in notebooks/test.ipynb (first cell). The values are computed there and stored here as constants.
 """

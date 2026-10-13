@@ -17,7 +17,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 VIEWER = os.path.join(ROOT, "docs")
 PORT = 8000
 CORE = os.path.join(ROOT, "run.py")
-WATCH_PY = [os.path.join(ROOT, "run.py")] + [os.path.join(ROOT, "pbits", f) for f in ("model.py", "simulate.py", "bayes.py", "export.py")]
+WATCH_PY = [os.path.join(ROOT, "run.py")] + [os.path.join(ROOT, "pbits", f) for f in ("model.py", "simulate.py", "ensemble.py", "bayes.py", "export.py")]
 WATCH_VIEWER = ["index.html", "main.js", "data.js"]
 # Auto-reload in the browser (polls /__version every 700 ms). Off because it costs memory;
 # reload the page manually (Cmd+R) instead. run.py is still re-run automatically.

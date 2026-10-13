@@ -400,10 +400,10 @@ for (const [cx, cz, white] of [[-1, -1, true], [1, -1, false], [-1, 1, false], [
     glows.push({ mesh: glowB, panelName: cx === 1 ? 'OBSERVATION o₀' : 'OBSERVATION o₁' });
     if (cx === -1) {   // square A (o₁): not the letter, but the white background glows orange
       glowB.visible = false;
-      const fieldGlow = new THREE.Mesh(new THREE.PlaneGeometry(BIG, BIG),
+      // box slightly larger than the square, so the side walls turn orange as well (top is just below the letter)
+      const fieldGlow = new THREE.Mesh(new THREE.BoxGeometry(BIG + 0.01, THICK * 2 + 0.002, BIG + 0.01),
         new THREE.MeshBasicMaterial({ color: 0xff8c1a, transparent: true, opacity: 0, depthWrite: false }));
-      fieldGlow.rotation.x = -Math.PI / 2;
-      fieldGlow.position.set(cx * BIG / 2, THICK + 0.002, cz * BIG / 2);   // above the square, below the black letter
+      fieldGlow.position.set(cx * BIG / 2, 0, cz * BIG / 2);   // same center as the square (y from -THICK to +THICK)
       scene2.add(fieldGlow);
       glows[glows.length - 1].mesh = fieldGlow;
     }

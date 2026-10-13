@@ -8,27 +8,32 @@ import jax.numpy as jnp
 import numpy as np
 
 from . import bayes
-from . import model as m
+from . import ensemble
+from . import model
 from . import simulate as sim
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VIEWER = os.path.join(ROOT, "docs")
 
 
-def build_export(traj, ens_probs):
-    stride = sim.EXPORT_STRIDE
-    test_points = np.random.default_rng(0).uniform(-1.5, 1.5, size=(8, m.N_BITS))
-    test_values = [float(m.V(jnp.array(p))) for p in test_points]
-    ens_export = {"%d,%d" % pr: np.round(ens_probs[:, i, :], 3).tolist() for i, pr in enumerate(sim.ENS_PAIRS)}
+def _clamp_pbits():
+    """(start step, (pbit, value)) for every clamped p-bit, in plan order."""
+    return [(round(t0 / sim.dt), (pbit, v)) for pbits, vals, t0 in sim.CLAMPS for pbit, v in zip(pbits, vals)]
+
+
+def build_export(traj, ens_probs, stride):
+    test_points = np.random.default_rng(0).uniform(-1.5, 1.5, size=(8, model.N_PBITS))
+    test_values = [float(model.V(jnp.array(p))) for p in test_points]
+    ens_export = {"%d,%d" % pr: np.round(ens_probs[:, i, :], 3).tolist() for i, pr in enumerate(ensemble.PAIRS)}
     return {
         "params": {
-            "alpha": m.alpha, "lam": m.lam, "beta": m.beta, "dt": m.dt,
-            "bias": np.asarray(m.bias).tolist(),
-            "J": np.asarray(m.J).tolist(),
+            "alpha": model.alpha, "lam": model.lam, "beta": sim.beta, "dt": sim.dt,
+            "bias": np.asarray(model.bias).tolist(),
+            "J": np.asarray(model.J).tolist(),
             "stride": stride,
-            "clamped": {str(k): v for k, v in {**m.CLAMPED, **m.CLAMPED_LATE}.items()},
-            "clamp_start": m.clamp_start // stride,
-            "clamp_starts": {str(k): s // stride for k, s in m.LATE_START.items()},
+            "clamped": {str(b): v for _, (b, v) in _clamp_pbits()},
+            "clamp_start": sim.steps // 3 // stride,   # legacy field, unused by the viewer
+            "clamp_starts": {str(b): s // stride for s, (b, _) in _clamp_pbits()},
         },
         "traj": np.round(np.asarray(traj)[::stride], 4).tolist(),
         "bayes3": bayes.BAYES_3,
